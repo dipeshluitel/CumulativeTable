@@ -21,6 +21,7 @@
 -- scoring_class scoring_class,
 -- years_since_last_season INTEGER,
 -- current_season INTEGER,
+-- is_active BOOLEAN,
 -- PRIMARY KEY(player_name, current_season)
 -- )
 
@@ -71,8 +72,10 @@ SELECT
 		WHEN t.season IS NOT NULL THEN 0
 			ELSE y.years_since_last_season + 1
 	END as years_since_last_season,
-	 
-	COALESCE(t.season, y.current_season+1) as current_season
+	COALESCE(t.season, y.current_season+1) as current_season,
+	CASE WHEN t.season IS NOT NULL THEN TRUE
+		ELSE FALSE
+	END AS is_active
 FROM today t FULL OUTER JOIN yesterday y
 	ON t.player_name = y.player_name
 
