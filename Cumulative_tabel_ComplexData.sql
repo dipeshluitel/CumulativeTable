@@ -63,7 +63,7 @@ SELECT
 		WHEN t.season IS NOT NULL THEN 
 		 CASE WHEN t.pts > 20 THEN 'star'
 		 	WHEN t.pts > 15 THEN 'good' 
-		 	WHEN t.pts > 15 THEN 'average'
+		 	WHEN t.pts > 10 THEN 'average'
 			 ELSE 'bad'
 		 END::scoring_class
 		 ELSE y.scoring_class
