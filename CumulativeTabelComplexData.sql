@@ -1,30 +1,12 @@
--- SELECT * FROM player_seasons;
--- CREATE TYPE season_stats AS(
--- 			season INTEGER,
--- 			gp INTEGER,
--- 			pts REAL,
--- 			reb REAL,
--- 			ast REAL
--- )
+CREATE TYPE season_stats AS(
+			season INTEGER,
+			gp INTEGER,
+			pts REAL,
+			reb REAL,
+			ast REAL
+)
 
--- CREATE TYPE scoring_class AS ENUM('star', 'good', 'average', 'bad')
-
--- CREATE TABLE players(
--- player_name TEXT,
--- height TEXT,
--- college TEXT,
--- country TEXT,
--- draft_year TEXT,
--- draft_round TEXT,
--- draft_number TEXT,
--- season_stats season_stats[],
--- scoring_class scoring_class,
--- years_since_last_season INTEGER,
--- current_season INTEGER,
--- is_active BOOLEAN,
--- PRIMARY KEY(player_name, current_season)
--- )
-
+CREATE TYPE scoring_class AS ENUM('star', 'good', 'average', 'bad')
 
 INSERT INTO players
 WITH yesterday AS (
@@ -81,11 +63,3 @@ FROM today t FULL OUTER JOIN yesterday y
 
 
 
-
--- SELECT * FROM players WHERE current_season=2001 AND player_name='Michael Jordan';
-
--- WITH unnested AS(
--- SELECT player_name,
--- 	UNNEST(season_stats) AS season_stats FROM players WHERE current_season=2001 AND player_name='Michael Jordan'
--- )
--- SELECT player_name, (season_stats::season_stats).* FROM unnested
